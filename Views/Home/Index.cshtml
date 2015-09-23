@@ -1,0 +1,49 @@
+﻿@model ULDCustomer.ViewModel.vmULDQuestion
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
+{
+<div id="content">
+
+    <p>
+        
+        <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
+        @Html.HiddenFor(m=>m.SurveyID)
+        <span>@ViewBag.ID.  </span> <span>@Html.DisplayFor(m => m.question)</span>
+        
+                
+    </p>
+    <p>
+        @foreach (var item in Model.Answers)
+        {
+            <div>
+                @Html.RadioButtonFor(m=>m.AnswerId,item.AnswerId)@item.AnswerText
+            </div> 
+        }
+    </p>
+
+    <p>
+        <input id="btnSubmit" type="submit" value="Next" class="" />
+    </p>
+</div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSubmit').click(function () {
+            var value = $('input[name=AnswerId]:checked').val();
+            if (value== undefined)
+            {
+                alert('Please select Answer');
+                return false;
+            }
+            
+        });
+    })
+
+    $(function () {
+        
+    });
+</script>

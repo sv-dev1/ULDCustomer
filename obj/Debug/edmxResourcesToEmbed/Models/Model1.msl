@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ULDModelStoreContainer" CdmEntityContainer="ULDEntities">
+    <EntitySetMapping Name="ULDCustomers">
+      <EntityTypeMapping TypeName="ULDModel.ULDCustomer">
+        <MappingFragment StoreEntitySet="ULDCustomer">
+          <ScalarProperty Name="ULDCustomerID" ColumnName="ULDCustomerID" />
+          <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="productIDPurchased" ColumnName="productIDPurchased" />
+          <ScalarProperty Name="datePurchased" ColumnName="datePurchased" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ULDProducts">
+      <EntityTypeMapping TypeName="ULDModel.ULDProduct">
+        <MappingFragment StoreEntitySet="ULDProduct">
+          <ScalarProperty Name="ULDProductID" ColumnName="ULDProductID" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ULDQuestions">
+      <EntityTypeMapping TypeName="ULDModel.ULDQuestion">
+        <MappingFragment StoreEntitySet="ULDQuestion">
+          <ScalarProperty Name="ULDQuestionID" ColumnName="ULDQuestionID" />
+          <ScalarProperty Name="question" ColumnName="question" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ULDSurveys">
+      <EntityTypeMapping TypeName="ULDModel.ULDSurvey">
+        <MappingFragment StoreEntitySet="ULDSurvey">
+          <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+          <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ULDSurveyAnswers">
+      <EntityTypeMapping TypeName="ULDModel.ULDSurveyAnswer">
+        <MappingFragment StoreEntitySet="ULDSurveyAnswer">
+          <ScalarProperty Name="ULDSurveyAnswerID" ColumnName="ULDSurveyAnswerID" />
+          <ScalarProperty Name="ULDQuestionID" ColumnName="ULDQuestionID" />
+          <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+          <ScalarProperty Name="answer" ColumnName="answer" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetPlans" FunctionName="ULDModel.Store.sp_GetPlans">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ULDModel.sp_GetPlans_Result">
+          <ScalarProperty Name="ULDProductID" ColumnName="ULDProductID" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uld_CustomerInsert" FunctionName="ULDModel.Store.uld_CustomerInsert" />
+    <FunctionImportMapping FunctionImportName="uld_CustomerValidate" FunctionName="ULDModel.Store.uld_CustomerValidate" />
+    <FunctionImportMapping FunctionImportName="uld_SurveyAnswerInsert" FunctionName="ULDModel.Store.uld_SurveyAnswerInsert" />
+    <FunctionImportMapping FunctionImportName="uld_SurveyCreate" FunctionName="ULDModel.Store.uld_SurveyCreate" />
+    <FunctionImportMapping FunctionImportName="uld_SurveyQuestionGet" FunctionName="ULDModel.Store.uld_SurveyQuestionGet" />
+    <FunctionImportMapping FunctionImportName="sp_CustomerInsert" FunctionName="ULDModel.Store.sp_CustomerInsert" />
+  </EntityContainerMapping>
+</Mapping>

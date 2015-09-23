@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ULDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ULDCustomer">
+    <Key>
+      <PropertyRef Name="ULDCustomerID" />
+    </Key>
+    <Property Name="ULDCustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ULDSurveyID" Type="int" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="dateCreated" Type="datetime2" Precision="7" />
+    <Property Name="productIDPurchased" Type="int" />
+    <Property Name="datePurchased" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="ULDProduct">
+    <Key>
+      <PropertyRef Name="ULDProductID" />
+    </Key>
+    <Property Name="ULDProductID" Type="int" Nullable="false" />
+    <Property Name="price" Type="money" />
+    <Property Name="URL" Type="varchar" MaxLength="100" />
+    <Property Name="dateCreated" Type="datetime2" Precision="7" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="ULDQuestion">
+    <Key>
+      <PropertyRef Name="ULDQuestionID" />
+    </Key>
+    <Property Name="ULDQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="question" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="ULDSurvey">
+    <Key>
+      <PropertyRef Name="ULDSurveyID" />
+    </Key>
+    <Property Name="ULDSurveyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datecreated" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="ULDSurveyAnswer">
+    <Key>
+      <PropertyRef Name="ULDSurveyAnswerID" />
+    </Key>
+    <Property Name="ULDSurveyAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ULDQuestionID" Type="int" />
+    <Property Name="ULDSurveyID" Type="int" />
+    <Property Name="answer" Type="varchar" MaxLength="4000" />
+    <Property Name="dateCreated" Type="datetime2" Precision="7" />
+  </EntityType>
+  <Function Name="sp_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+    <Parameter Name="firstName" Type="varchar" Mode="In" />
+    <Parameter Name="lastname" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="ProductIDPurchased" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetPlans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uld_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="firstName" Type="varchar" Mode="In" />
+    <Parameter Name="lastName" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uld_CustomerValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ULDCustomerID" Type="int" Mode="In" />
+    <Parameter Name="ULDProductID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uld_SurveyAnswerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ULDQuestionID" Type="int" Mode="In" />
+    <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+    <Parameter Name="answer" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="uld_SurveyCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uld_SurveyQuestionGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ULDQuestionID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ULDModelStoreContainer">
+    <EntitySet Name="ULDCustomer" EntityType="Self.ULDCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ULDProduct" EntityType="Self.ULDProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ULDQuestion" EntityType="Self.ULDQuestion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ULDSurvey" EntityType="Self.ULDSurvey" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ULDSurveyAnswer" EntityType="Self.ULDSurveyAnswer" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

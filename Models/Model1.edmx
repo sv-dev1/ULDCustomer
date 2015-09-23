@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ULDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ULDCustomer">
+          <Key>
+            <PropertyRef Name="ULDCustomerID" />
+          </Key>
+          <Property Name="ULDCustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ULDSurveyID" Type="int" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="dateCreated" Type="datetime2" Precision="7" />
+          <Property Name="productIDPurchased" Type="int" />
+          <Property Name="datePurchased" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="ULDProduct">
+          <Key>
+            <PropertyRef Name="ULDProductID" />
+          </Key>
+          <Property Name="ULDProductID" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" />
+          <Property Name="URL" Type="varchar" MaxLength="100" />
+          <Property Name="dateCreated" Type="datetime2" Precision="7" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ULDQuestion">
+          <Key>
+            <PropertyRef Name="ULDQuestionID" />
+          </Key>
+          <Property Name="ULDQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="ULDSurvey">
+          <Key>
+            <PropertyRef Name="ULDSurveyID" />
+          </Key>
+          <Property Name="ULDSurveyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datecreated" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="ULDSurveyAnswer">
+          <Key>
+            <PropertyRef Name="ULDSurveyAnswerID" />
+          </Key>
+          <Property Name="ULDSurveyAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ULDQuestionID" Type="int" />
+          <Property Name="ULDSurveyID" Type="int" />
+          <Property Name="answer" Type="varchar" MaxLength="4000" />
+          <Property Name="dateCreated" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Function Name="sp_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastname" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="ProductIDPurchased" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetPlans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uld_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uld_CustomerValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ULDCustomerID" Type="int" Mode="In" />
+          <Parameter Name="ULDProductID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uld_SurveyAnswerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ULDQuestionID" Type="int" Mode="In" />
+          <Parameter Name="ULDSurveyID" Type="int" Mode="In" />
+          <Parameter Name="answer" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uld_SurveyCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uld_SurveyQuestionGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ULDQuestionID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ULDModelStoreContainer">
+          <EntitySet Name="ULDCustomer" EntityType="Self.ULDCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ULDProduct" EntityType="Self.ULDProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ULDQuestion" EntityType="Self.ULDQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ULDSurvey" EntityType="Self.ULDSurvey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ULDSurveyAnswer" EntityType="Self.ULDSurveyAnswer" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ULDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ULDCustomer">
+          <Key>
+            <PropertyRef Name="ULDCustomerID" />
+          </Key>
+          <Property Name="ULDCustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ULDSurveyID" Type="Int32" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="7" />
+          <Property Name="productIDPurchased" Type="Int32" />
+          <Property Name="datePurchased" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="ULDProduct">
+          <Key>
+            <PropertyRef Name="ULDProductID" />
+          </Key>
+          <Property Name="ULDProductID" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="7" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ULDQuestion">
+          <Key>
+            <PropertyRef Name="ULDQuestionID" />
+          </Key>
+          <Property Name="ULDQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ULDSurvey">
+          <Key>
+            <PropertyRef Name="ULDSurveyID" />
+          </Key>
+          <Property Name="ULDSurveyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datecreated" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="ULDSurveyAnswer">
+          <Key>
+            <PropertyRef Name="ULDSurveyAnswerID" />
+          </Key>
+          <Property Name="ULDSurveyAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ULDQuestionID" Type="Int32" />
+          <Property Name="ULDSurveyID" Type="Int32" />
+          <Property Name="answer" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityContainer Name="ULDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ULDCustomers" EntityType="Self.ULDCustomer" />
+          <EntitySet Name="ULDProducts" EntityType="Self.ULDProduct" />
+          <EntitySet Name="ULDQuestions" EntityType="Self.ULDQuestion" />
+          <EntitySet Name="ULDSurveys" EntityType="Self.ULDSurvey" />
+          <EntitySet Name="ULDSurveyAnswers" EntityType="Self.ULDSurveyAnswer" />
+          <FunctionImport Name="sp_GetPlans" ReturnType="Collection(ULDModel.sp_GetPlans_Result)" />
+          <FunctionImport Name="uld_CustomerInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="ULDSurveyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uld_CustomerValidate">
+            <Parameter Name="ULDCustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="ULDProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uld_SurveyAnswerInsert">
+            <Parameter Name="ULDQuestionID" Mode="In" Type="Int32" />
+            <Parameter Name="ULDSurveyID" Mode="In" Type="Int32" />
+            <Parameter Name="answer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uld_SurveyCreate" ReturnType="Collection(Decimal)" />
+          <FunctionImport Name="uld_SurveyQuestionGet" ReturnType="Collection(String)">
+          <Parameter Name="ULDQuestionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CustomerInsert">
+            <Parameter Name="ULDSurveyID" Mode="In" Type="Int32" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastname" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="ProductIDPurchased" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_GetPlans_Result">
+          <Property Type="Int32" Name="ULDProductID" Nullable="false" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="String" Name="URL" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="dateCreated" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ULDModelStoreContainer" CdmEntityContainer="ULDEntities">
+          <EntitySetMapping Name="ULDCustomers">
+            <EntityTypeMapping TypeName="ULDModel.ULDCustomer">
+              <MappingFragment StoreEntitySet="ULDCustomer">
+                <ScalarProperty Name="ULDCustomerID" ColumnName="ULDCustomerID" />
+                <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="productIDPurchased" ColumnName="productIDPurchased" />
+                <ScalarProperty Name="datePurchased" ColumnName="datePurchased" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ULDProducts">
+            <EntityTypeMapping TypeName="ULDModel.ULDProduct">
+              <MappingFragment StoreEntitySet="ULDProduct">
+                <ScalarProperty Name="ULDProductID" ColumnName="ULDProductID" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ULDQuestions">
+            <EntityTypeMapping TypeName="ULDModel.ULDQuestion">
+              <MappingFragment StoreEntitySet="ULDQuestion">
+                <ScalarProperty Name="ULDQuestionID" ColumnName="ULDQuestionID" />
+                <ScalarProperty Name="question" ColumnName="question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ULDSurveys">
+            <EntityTypeMapping TypeName="ULDModel.ULDSurvey">
+              <MappingFragment StoreEntitySet="ULDSurvey">
+                <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+                <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ULDSurveyAnswers">
+            <EntityTypeMapping TypeName="ULDModel.ULDSurveyAnswer">
+              <MappingFragment StoreEntitySet="ULDSurveyAnswer">
+                <ScalarProperty Name="ULDSurveyAnswerID" ColumnName="ULDSurveyAnswerID" />
+                <ScalarProperty Name="ULDQuestionID" ColumnName="ULDQuestionID" />
+                <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetPlans" FunctionName="ULDModel.Store.sp_GetPlans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ULDModel.sp_GetPlans_Result">
+                <ScalarProperty Name="ULDProductID" ColumnName="ULDProductID" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uld_CustomerInsert" FunctionName="ULDModel.Store.uld_CustomerInsert" />
+          <FunctionImportMapping FunctionImportName="uld_CustomerValidate" FunctionName="ULDModel.Store.uld_CustomerValidate" />
+          <FunctionImportMapping FunctionImportName="uld_SurveyAnswerInsert" FunctionName="ULDModel.Store.uld_SurveyAnswerInsert" />
+          <FunctionImportMapping FunctionImportName="uld_SurveyCreate" FunctionName="ULDModel.Store.uld_SurveyCreate" />
+          <FunctionImportMapping FunctionImportName="uld_SurveyQuestionGet" FunctionName="ULDModel.Store.uld_SurveyQuestionGet" />
+          <FunctionImportMapping FunctionImportName="sp_CustomerInsert" FunctionName="ULDModel.Store.sp_CustomerInsert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
