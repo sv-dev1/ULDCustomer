@@ -20,8 +20,8 @@ namespace ULDCustomer.Controllers
 
             vmULDQuestion model=new vmULDQuestion();
             ULDSurvey _uldservey = new ULDSurvey();
-             model.question= _obj.GetQuestionByID(ID);
-            // model.SurveyID = _obj.AddServey();
+            model.question= _obj.GetQuestionByID(ID);
+            model.SurveyID = _obj.AddServey();
             List<Answer> answer = new List<Answer>();
             answer.Add(new Answer { AnswerId = 1, AnswerText = "Answer A" });
             answer.Add(new Answer { AnswerId = 2, AnswerText = "Answer B" });
@@ -61,6 +61,7 @@ namespace ULDCustomer.Controllers
 
                 if (model.ULDQuestionID < 4)
                 {
+
                     int QuestionID = model.ULDQuestionID + 1;
                     model.question = _obj.GetQuestionByID(QuestionID);
                     ViewBag.ID = QuestionID;
@@ -72,7 +73,7 @@ namespace ULDCustomer.Controllers
                     model.Answers = answer;
                     return View(model);
                 }
-                return RedirectToAction("Index","PinPayment");
+                return RedirectToAction("CreateSubscriber", "PinPayment", new { id = "Plan_OneTime", SurveyID=model.SurveyID });
             }
             catch (Exception ex)
             { 

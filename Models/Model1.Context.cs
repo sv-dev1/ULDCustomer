@@ -128,5 +128,14 @@ namespace ULDCustomer.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CustomerInsert", uLDSurveyIDParameter, firstNameParameter, lastnameParameter, emailParameter, productIDPurchasedParameter);
         }
+    
+        public virtual int sp_CustomerValidateByCustomerID(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("customerID", customerID) :
+                new ObjectParameter("customerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CustomerValidateByCustomerID", customerIDParameter);
+        }
     }
 }

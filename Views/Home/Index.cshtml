@@ -6,14 +6,10 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
 {
 <div id="content">
-
-    <p>
-        
+    <p> 
         <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
         @Html.HiddenFor(m=>m.SurveyID)
         <span>@ViewBag.ID.  </span> <span>@Html.DisplayFor(m => m.question)</span>
-        
-                
     </p>
     <p>
         @foreach (var item in Model.Answers)

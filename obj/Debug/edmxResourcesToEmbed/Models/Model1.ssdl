@@ -12,6 +12,8 @@
     <Property Name="dateCreated" Type="datetime2" Precision="7" />
     <Property Name="productIDPurchased" Type="int" />
     <Property Name="datePurchased" Type="datetime2" Precision="7" />
+    <Property Name="dateValidated" Type="datetime2" Precision="7" />
+    <Property Name="ValidatedFlag" Type="tinyint" />
   </EntityType>
   <EntityType Name="ULDProduct">
     <Key>
@@ -54,6 +56,9 @@
     <Parameter Name="lastname" Type="varchar" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
     <Parameter Name="ProductIDPurchased" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_CustomerValidateByCustomerID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetPlans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uld_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

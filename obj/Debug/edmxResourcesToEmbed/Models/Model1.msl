@@ -4,6 +4,8 @@
     <EntitySetMapping Name="ULDCustomers">
       <EntityTypeMapping TypeName="ULDModel.ULDCustomer">
         <MappingFragment StoreEntitySet="ULDCustomer">
+          <ScalarProperty Name="ValidatedFlag" ColumnName="ValidatedFlag" />
+          <ScalarProperty Name="dateValidated" ColumnName="dateValidated" />
           <ScalarProperty Name="ULDCustomerID" ColumnName="ULDCustomerID" />
           <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
@@ -72,5 +74,6 @@
     <FunctionImportMapping FunctionImportName="uld_SurveyCreate" FunctionName="ULDModel.Store.uld_SurveyCreate" />
     <FunctionImportMapping FunctionImportName="uld_SurveyQuestionGet" FunctionName="ULDModel.Store.uld_SurveyQuestionGet" />
     <FunctionImportMapping FunctionImportName="sp_CustomerInsert" FunctionName="ULDModel.Store.sp_CustomerInsert" />
+    <FunctionImportMapping FunctionImportName="sp_CustomerValidateByCustomerID" FunctionName="ULDModel.Store.sp_CustomerValidateByCustomerID" />
   </EntityContainerMapping>
 </Mapping>

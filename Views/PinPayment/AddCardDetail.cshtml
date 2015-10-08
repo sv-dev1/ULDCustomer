@@ -10,26 +10,143 @@
 }
 </style>
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Place Order" onclick="SucessFunction();" class="btn btn-lg btn-primary" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.token)
+    <div id="formCreate">
+        <div class="row">
+            <h2>
+                @Model.title
+                @Html.HiddenFor(model => model.title)
+            </h2>
+            <h4>
+                @Model.description
+                @Html.HiddenFor(model => model.description)
+            </h4>
+            <small>Your card will not be charged until your 30 day free trial has ended</small>
+            <hr />
+            <div class="row">
+                <input type="hidden" value="@ViewBag.CustomerId" id="CustomerId" />
+                @Html.HiddenFor(model => model.CustomerId)
+                @Html.HiddenFor(model => model.chargeFrequency)
+                @if (Model.chargeFrequency == "annual")
+                {
+                    <div class="col-md-5"><strong>12 Months</strong></div>
+
+                }
+                else
+                {
+                    <div class="col-md-5"><strong>1 Month</strong></div>
+                }
+                <div class="col-md-6 text-right"><strong>$@Convert.ToDecimal(Model.price).ToString("0.00")</strong></div>
+                @Html.HiddenFor(model => model.price)
+            </div>
+            <hr />
+            <div class="form-horizontal">
+                @Html.ValidationMessage("PaymentError")
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <h5>Billing Info</h5>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="control-label col-md-2">Name on Card</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.fullName, new { htmlAttributes = new { @placeholder = "Card Holder's Name", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.firstName)
+                        @Html.HiddenFor(model => model.lastName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Card Number</label>                    
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.cardNumber, new { htmlAttributes = new { @placeholder = "Debit/Credit Card Number", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.cardNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="expiry-month">Expiration Date</label>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                @Html.DropDownListFor(model => model.month, (SelectList)ViewBag.month, "Month", new { @class = "form-control col-sm-2" })
+                                @Html.ValidationMessageFor(model => model.month, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-3">
+                                @Html.DropDownListFor(model => model.year, (SelectList)ViewBag.year, "Year", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.year, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Card CVV</label>
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.verificationValue, new { htmlAttributes = new { @placeholder = "Security Code", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.verificationValue, "", new { @class = "text-danger" })
+                    </div>
+                </div>                
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <h5>Billing Address</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="col-md-2 control-label">
+                        Country
+                    </label>
+                    <div class="col-md-9 controls">
+                        @Html.DropDownListFor(model => model.BillingInfo.Country, (SelectList)ViewBag.CountryList, "Country", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="address">Address</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.BillingInfo.Address, new { htmlAttributes = new { @placeholder = "Address", @class = "form-control" } })                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="col-md-2 control-label">City</label>
+                    <div class="col-md-9 controls">
+                        @Html.EditorFor(model => model.BillingInfo.City, new { htmlAttributes = new { @placeholder = "City", @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="col-md-2 control-label">State</label>
+                    <div class="col-md-9 controls">
+                        @Html.EditorFor(model => model.BillingInfo.State, new { htmlAttributes = new { @placeholder = "State", @class = "form-control" } })                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="zip">Zip Code</label>
+                    <div class="col-md-1 controls">
+                        @Html.EditorFor(model => model.BillingInfo.Zip, new { htmlAttributes = new { @placeholder = "Zip Code", @class = "form-control" } })
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Place Order" class="btn btn-lg btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+}
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <script type="text/javascript">
     function SucessFunction()
     {
-        window.location.href = "/PinPayment/PaymentSuccess";
+        window.location.href = "/PinPayment/ThankYou";
         return false();
     }
 </script>
 
-@*<script type="text/javascript">
-	 _veroq.push(['user', { id: '@ViewBag.id', email: '@ViewBag.email', name: '@ViewBag.name', created_at: '@ViewBag.date'}]);
-</script>
-
-<script style="text/javascript">
- _veroq.push(['track', 'CreateAccount']);
-</script>*@

@@ -325,7 +325,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -368,7 +370,7 @@
     <Content Include="Views\PinPayment\CreateSubscriber.cshtml" />
     <Content Include="Views\PinPayment\Index.cshtml" />
     <Content Include="Views\PinPayment\PaymentFail.cshtml" />
-    <Content Include="Views\PinPayment\PaymentSuccess.cshtml" />
+    <Content Include="Views\PinPayment\ThankYou.cshtml" />
     <Content Include="Views\PinPayment\Plans.cshtml" />
     <Content Include="Views\PinPayment\Subscriptions.cshtml" />
     <Content Include="Views\PinPayment\Success.cshtml" />

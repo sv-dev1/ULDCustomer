@@ -22,5 +22,7 @@ namespace ULDCustomer.Models
         public Nullable<System.DateTime> dateCreated { get; set; }
         public Nullable<int> productIDPurchased { get; set; }
         public Nullable<System.DateTime> datePurchased { get; set; }
+        public Nullable<System.DateTime> dateValidated { get; set; }
+        public Nullable<byte> ValidatedFlag { get; set; }
     }
 }

@@ -103,7 +103,7 @@ namespace ULDCustomer.Controllers
             }
         }
         //[Route("{id}")]
-        public ActionResult CreateSubscriber(string id)
+        public ActionResult CreateSubscriber(string id, int SurveyID)
         {
             try
             {
@@ -112,6 +112,7 @@ namespace ULDCustomer.Controllers
                 var f = plans.FirstOrDefault(x => x.Name == id);
                 SiteSubscriber obj = new SiteSubscriber();
                 obj.SubscriptionId = f.Id.ToString();
+                obj.ULDSurveyID = SurveyID;
                 //obj.ServiceLevel = f.ServiceLevel.ToString();
                 return View("CreateSubscriber", obj);
             }
@@ -136,11 +137,11 @@ namespace ULDCustomer.Controllers
                     int cutomerid = model.AddCustomer(obj);
                     xml = "<subscriber><customer-id>" + cutomerid + "</customer-id><screen-name>" + obj.FirstName + obj.LastName + "</screen-name></subscriber>";
                     site = ConfigurationManager.AppSettings["apiUrl"].ToString();
-                    //url = string.Format("https://subs.pinpayments.com/api/v4/{0}/subscribers.xml", site);
-                    //CreateSubscriberApi(url, xml, "Post");
+                    url = string.Format("https://subs.pinpayments.com/api/v4/{0}/subscribers.xml", site);
+                    CreateSubscriberApi(url, xml, "Post");
                     CardDetail obj1 = new CardDetail();
 
-                    //obj1.token = GenrateInvoice(obj.SubscriptionId, cutomerid.ToString(), obj.FirstName, obj.Email);
+                    obj1.token = GenrateInvoice(obj.SubscriptionId, cutomerid.ToString(), obj.FirstName, obj.Email);
                     obj1.firstName = obj.FirstName;
                     obj1.lastName = obj.LastName;
                     obj1.fullName = obj.FirstName + " " + obj.LastName;
@@ -226,9 +227,9 @@ namespace ULDCustomer.Controllers
                 }
                 try
                 {
-                    xml = "<payment>  <account-type>" + obj.accountType + "</account-type><credit-card><number>" + obj.cardNumber + "</number><card-type>" + obj.cardType.Trim() + "</card-type><verification-value>" + obj.verificationValue + "</verification-value><month>" + obj.month + "</month><year>" + obj.year + "</year> <first-name>" + obj.firstName + "</first-name><last-name>" + obj.lastName + "</last-name><address1>" + obj.BillingInfo.Address + "</address1><city>" + obj.BillingInfo.City + "</city><state>" + obj.BillingInfo.State + "</state><zip>" + obj.BillingInfo.Zip + "</zip><country>" + obj.BillingInfo.Country + "</country><phone-number>480-225-8217</phone-number></credit-card></payment>";
+                    //xml = "<payment>  <account-type>" + obj.accountType + "</account-type><credit-card><number>" + obj.cardNumber + "</number><card-type>" + obj.cardType.Trim() + "</card-type><verification-value>" + obj.verificationValue + "</verification-value><month>" + obj.month + "</month><year>" + obj.year + "</year> <first-name>" + obj.firstName + "</first-name><last-name>" + obj.lastName + "</last-name><address1>" + obj.BillingInfo.Address + "</address1><city>" + obj.BillingInfo.City + "</city><state>" + obj.BillingInfo.State + "</state><zip>" + obj.BillingInfo.Zip + "</zip><country>" + obj.BillingInfo.Country + "</country><phone-number>480-225-8217</phone-number></credit-card></payment>";
                     //xml = "<payment><account-type>credit-card</account-type><credit-card><number>" + obj.cardNumber + "</number><card-type>" + Request.Form["CardType"].ToString() + "</card-type><verification-Value>" + obj.verificationValue + "</verification-Value><month>" + obj.month + "</month><year>" + obj.year + "</year><first-name>" + obj.firstName + "</first-name><last-name>" + obj.lastName + "</last-name> <address1>" + obj.BillingInfo.Address + "</address1><city>" + obj.BillingInfo.City + "</city><state>" + obj.BillingInfo.State + "</state><zip>" + obj.BillingInfo.Zip + "</zip><country>"+obj.BillingInfo.Country+"</country></credit-card></payment>";
-                    //xml = "<payment>  <account-type>credit-card</account-type><credit-card><number>4222222222222</number><card-type>visa</card-type><verification-value>234</verification-value><month>1</month><year>2018</year> <first-name>"+obj.firstName+"</first-name><last-name>"+obj.lastName+"</last-name></credit-card></payment>";
+                    xml = "<payment>  <account-type>credit-card</account-type><credit-card><number>4222222222222</number><card-type>visa</card-type><verification-value>234</verification-value><month>1</month><year>2018</year> <first-name>" + obj.firstName + "</first-name><last-name>" + obj.lastName + "</last-name></credit-card></payment>";
                     site = ConfigurationManager.AppSettings["apiUrl"].ToString();
                     url = string.Format("https://subs.pinpayments.com/api/v4/{0}/invoices/", site);
                     string ErrorResponse = Payment(url + obj.token + "/pay.xml", xml, "PUT", obj.token);
@@ -297,7 +298,7 @@ namespace ULDCustomer.Controllers
                     model.ValidateCustomerID(obj.CustomerId);
                     ViewBag.id = obj.CustomerId;
                     ViewBag.email = TempData["PrimaryEmail"];
-                    return View("PaymentSuccess");
+                    return RedirectToAction("ThankYou");
                 }
                 catch (WebException ex)
                 {
@@ -322,7 +323,7 @@ namespace ULDCustomer.Controllers
             return Json(cust.IsEmailExist(Email), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult PaymentSuccess()
+        public ActionResult ThankYou()
         {
             return View();
         }

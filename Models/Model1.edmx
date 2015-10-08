@@ -17,6 +17,8 @@
           <Property Name="dateCreated" Type="datetime2" Precision="7" />
           <Property Name="productIDPurchased" Type="int" />
           <Property Name="datePurchased" Type="datetime2" Precision="7" />
+          <Property Name="dateValidated" Type="datetime2" Precision="7" />
+          <Property Name="ValidatedFlag" Type="tinyint" />
         </EntityType>
         <EntityType Name="ULDProduct">
           <Key>
@@ -59,6 +61,9 @@
           <Parameter Name="lastname" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="ProductIDPurchased" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CustomerValidateByCustomerID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="customerID" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GetPlans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uld_CustomerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -103,6 +108,8 @@
           <Property Name="dateCreated" Type="DateTime" Precision="7" />
           <Property Name="productIDPurchased" Type="Int32" />
           <Property Name="datePurchased" Type="DateTime" Precision="7" />
+          <Property Name="dateValidated" Type="DateTime" Precision="7" />
+          <Property Name="ValidatedFlag" Type="Byte" />
         </EntityType>
         <EntityType Name="ULDProduct">
           <Key>
@@ -172,6 +179,9 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="ProductIDPurchased" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_CustomerValidateByCustomerID">
+          <Parameter Name="customerID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_GetPlans_Result">
           <Property Type="Int32" Name="ULDProductID" Nullable="false" />
@@ -190,6 +200,8 @@
           <EntitySetMapping Name="ULDCustomers">
             <EntityTypeMapping TypeName="ULDModel.ULDCustomer">
               <MappingFragment StoreEntitySet="ULDCustomer">
+                <ScalarProperty Name="ValidatedFlag" ColumnName="ValidatedFlag" />
+                <ScalarProperty Name="dateValidated" ColumnName="dateValidated" />
                 <ScalarProperty Name="ULDCustomerID" ColumnName="ULDCustomerID" />
                 <ScalarProperty Name="ULDSurveyID" ColumnName="ULDSurveyID" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
@@ -258,6 +270,7 @@
           <FunctionImportMapping FunctionImportName="uld_SurveyCreate" FunctionName="ULDModel.Store.uld_SurveyCreate" />
           <FunctionImportMapping FunctionImportName="uld_SurveyQuestionGet" FunctionName="ULDModel.Store.uld_SurveyQuestionGet" />
           <FunctionImportMapping FunctionImportName="sp_CustomerInsert" FunctionName="ULDModel.Store.sp_CustomerInsert" />
+          <FunctionImportMapping FunctionImportName="sp_CustomerValidateByCustomerID" FunctionName="ULDModel.Store.sp_CustomerValidateByCustomerID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
