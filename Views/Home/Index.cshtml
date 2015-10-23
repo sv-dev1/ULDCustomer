@@ -2,44 +2,77 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
-{
-<div id="content">
-    <p> 
-        <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
-        @Html.HiddenFor(m=>m.SurveyID)
-        <span>@ViewBag.ID.  </span> <span>@Html.DisplayFor(m => m.question)</span>
-    </p>
-    <p>
-        @foreach (var item in Model.Answers)
+<div class="top-bg">
+    <div class="container">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
         {
-            <div>
-                @Html.RadioButtonFor(m=>m.AnswerId,item.AnswerId)@item.AnswerText
-            </div> 
+            <div class="wizard-header">
+                <div class="step">
+                    <p><small>Step @ViewBag.ID of 4</small></p>
+                    <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
+                    @Html.HiddenFor(m => m.SurveyID)
+                    @Html.HiddenFor(m => m.AnswerId)
+
+
+                    <h4>@Html.DisplayFor(m => m.question) </h4>
+                </div>
+                <div class="colunm step-4">
+                    @foreach (var item in Model.Answers)
+                    {
+                        <div class="col-xs-6 col-md-3 citem">
+                            <a class="submitQuestion" href="#">
+                                <figure><img class="img-responsive" src="images/img-1.jpg"></figure>
+                                @{
+                        string name = "Answer" + item.AnswerId;
+                                }
+                                <div class="quiz-description"> <input type="hidden" name="@name" value="@item.AnswerId" /> @item.AnswerText</div>
+                            </a>
+
+                        </div>
+                    }
+                </div>
+                <div class="pagination-block">
+                    <ol class="pagination">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ol>
+                </div>
+            </div>
         }
-    </p>
-
-    <p>
-        <input id="btnSubmit" type="submit" value="Next" class="" />
-    </p>
+    </div>
 </div>
-}
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#btnSubmit').click(function () {
-            var value = $('input[name=AnswerId]:checked').val();
-            if (value== undefined)
-            {
-                alert('Please select Answer');
-                return false;
-            }
-            
-        });
+    $(document).ready(function () {      
+        $(".submitQuestion").click(function () {
+            $("#AnswerId").val($(" input", this).val());
+            $("#FormQues").submit();            
+        })
     })
-
-    $(function () {
-        
-    });
 </script>
+@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
+    {
+    <div id="content">
+        <p>
+            <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
+            @Html.HiddenFor(m=>m.SurveyID)
+            <span>@ViewBag.ID.  </span> <span>@Html.DisplayFor(m => m.question)</span>
+        </p>
+        <p>
+            @foreach (var item in Model.Answers)
+            {
+                <div>
+                    @Html.RadioButtonFor(m=>m.AnswerId,item.AnswerId)@item.AnswerText
+                </div>
+            }
+        </p>
+
+        <p>
+            <input id="btnSubmit" type="submit" value="Next" class="" />
+        </p>
+    </div>
+    }
+*@

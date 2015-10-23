@@ -1,0 +1,96 @@
+body{ margin:0; padding:0; background:#ccc;}
+
+h1,h2,h3,h4,h5,h6,p{ padding:0; margin:0;}
+
+ol,ul{ margin:0; padding:0; list-style:none;}
+
+.container{ max-width:1000px; background:#fff; padding:0;}
+
+/**********************************************************************************************/
+
+.wizard-header { padding: 30px; overflow:hidden;}
+
+.step{ text-align:center;}
+.step p { color: #5e5e5e;  margin: 0 0 10px;}
+.step h4 { color: #5e5e5e;  font-size: 20px;  letter-spacing: 4px;  line-height: 1.6;  text-transform: uppercase;}
+.colunm { margin: 35px 0 0;}
+.citem { cursor: pointer;  margin-bottom: 20px;  text-align: center;}
+.citem figure { margin-bottom: 10px;  position: relative;}
+.citem figure img {   display: block;    height: auto;    max-width: 100%;    width: 100%;}
+.citem figure:hover::before, .citem.selected figure::before { border: 9px solid #fff;  bottom: 0;  content: "";  left: 0;  outline: 5px solid #c8c8c8;  position: absolute;  right: 0;  top: 0;}
+.sizes {
+  background-color: #f3f3f3;
+  font-size: 1.8em;
+  font-weight: bold;
+  height: 100%;
+  line-height: 100px;
+  vertical-align: middle;
+}
+
+.pagination-block {
+  clear: both;
+  display: inline-block;
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+}
+.pagination {
+  margin: 0 auto;
+}
+
+.pagination-block .pagination > li {
+  display: inline-block;
+}
+
+.not-available.relaxed {
+  padding: 62px 0 80px;
+ 
+}
+
+.box-form {
+  background-color: #ebebeb;
+  height: 800px;
+  padding: 20px;
+  text-align: center;
+}
+.btn-xlg {
+  border-radius: 0;
+  padding: 20.5px 30px;
+}
+
+.input-block input {
+  border: medium none;
+  height: 50px;
+  margin:0 0 20px;
+  padding: 0 0 0 10px;
+  width: 100%;
+}
+
+.text-left.fz13.mb10 input {
+  float: left;
+  height: auto;
+  margin: 4px 0 0;
+  width: auto;
+}
+.text-left.fz13.mb10 {
+  margin: 20px 0 0;
+}
+
+
+
+.text-left.fz13.mb10 label {
+  color: #333;
+  font-weight: normal;
+}
+.mb20 {
+  margin: 15px 0 0;
+}
+
+.mtb28 {
+  margin: 20px 0 6px;
+}
+.input-block input.LAST{ margin:0;}
+.text-danger
+{
+    float:left;
+}

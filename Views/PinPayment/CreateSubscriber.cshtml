@@ -6,63 +6,99 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <h2>Sign Up</h2>
-@using (Html.BeginForm("CreateSubscriber", "PinPayment"))
-{
-    @Html.AntiForgeryToken()  
-        @Html.HiddenFor(m=>m.ServiceLevel)
-    @Html.HiddenFor(m=>m.SubscriptionId)
-    @Html.HiddenFor(m => m.ULDSurveyID)
-    <div class="form-horizontal">
-        <h4>New to MailMonitor? Sign Up Today.</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label col-md-2">First Name</label>
-                <div class="col-md-9">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+<div class="top-bg">
+    <div class="container">
+        <div class="wizard-header">
+            <div class="step">
+                <p><small>Step 6 of 6</small></p>
+                <h4>CREATE YOUR FREE ACCOUNT</h4>
+            </div>
+            <div class="colunm step-6">
+                <div class="row row0 grybg">
+                    <div class="col-xs-12 col-sm-6 pull-right">
+                        <div class="box-form">
+                            <button class="btn btn-primary btn-block btn-xlg" type="button">CONNECT WITH FACEBOOK</button>
+
+                            <div class="mtb28">or sign up with your email address</div>
+                            <div class="input-block">
+                                @using (Html.BeginForm("CreateSubscriber", "PinPayment"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.ServiceLevel)
+                                    @Html.HiddenFor(m => m.SubscriptionId)
+                                    @Html.HiddenFor(m => m.ULDSurveyID)
+                                    <div class="form-horizontal">
+                                        <h4>New to MailMonitor? Sign Up Today.</h4>
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control text-box single-line", @placeholder = "First Name" })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control text-box single-line", @placeholder = "Last Name" })
+                                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control text-box single-line", @placeholder = "Email" })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.Company, new { @class = "form-control text-box single-line", @placeholder = "Company Name" })
+                                                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="display:none;">
+
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(model => model.PromoCode, new { @class = "form-control text-box single-line", @placeholder = "Promo Code" })
+                                                @Html.ValidationMessageFor(model => model.PromoCode, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span></span>
+                                            <div style="font-size:14px;white-space:nowrap;">By clicking below you are agreeing to the <a href="http://mailmonitorapp.com/terms/" target="_blank">Terms and Conditions.</a></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input type="submit" value="Sign Up" class="btn btn-lg btn-primary" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 pull-right">
+                        <div><img class="img-responsive" src="~/Images/img-6.jpg"></div>
+                    </div>
                 </div>
+                <div class="pagination-block">
+                    <ol class="pagination">
+                        <li><a href="index.html"></a></li>
+                        <li><a href="step-2.html"></a></li>
+                        <li><a href="step-3.html"></a></li>
+                        <li><a href="step-4.html"></a></li>
+                        <li><a href="step-5.html"></a></li>
+                        <li><a href="step-6.html"></a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Last Name</label>
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>       
 
-        <div class="form-group">
-            <label class ="control-label col-md-2">  Company Name</label>  
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
-                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-         <div class="form-group" style="display:none;">
-            @Html.LabelFor(model => model.PromoCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.PromoCode, new { htmlAttributes = new { @class = "form-control text-box single-line" } })
-                @Html.ValidationMessageFor(model => model.PromoCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <span></span>
-            <div style="font-size:14px;white-space:nowrap;margin-left:252px;">By clicking below you are agreeing to the <a href="http://mailmonitorapp.com/terms/" target="_blank">Terms and Conditions.</a></div>
-        </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Sign Up" class="btn btn-lg btn-primary" />
-        </div>
-    </div>
-    </div>
-}
