@@ -33,12 +33,45 @@
                 </div>
                 <div class="pagination-block">
                     <ol class="pagination">
+                        @{
+            switch ((int)ViewBag.ID)
+            {
+                case 1:
+                    <li class="active">
+                        <a href="#"></a>
+                    </li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
+                    break;
+                case 2:
+                <li>
+                    <a href="#"></a>
+                </li>
+                <li class="active"><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
+                    break;
+                case 3:
+                <li>
+                    <a href="#"></a>
+                </li>
                         <li><a href="#"></a></li>
+                        <li class="active"><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    break;
+                case 4:
+                <li>
+                    <a href="#"></a>
+                </li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li class="active"><a href="#"></a></li>
+                    break;
+            }
+                        }
+
+
                     </ol>
                 </div>
             </div>
@@ -46,10 +79,10 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {      
+    $(document).ready(function () {
         $(".submitQuestion").click(function () {
             $("#AnswerId").val($(" input", this).val());
-            $("#FormQues").submit();            
+            $("#FormQues").submit();
         })
     })
 </script>
