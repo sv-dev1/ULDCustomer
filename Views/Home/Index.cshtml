@@ -4,6 +4,7 @@
 }
 <div class="top-bg">
     <div class="container">
+        <input type="hidden" id="hdnlink" name="name" value=" " />
         @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
         {
             <div class="wizard-header">
@@ -37,33 +38,25 @@
             switch ((int)ViewBag.ID)
             {
                 case 1:
-                    <li class="active">
-                        <a href="#"></a>
-                    </li>
+                        <li class="active"><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                     break;
                 case 2:
-                <li>
-                    <a href="#"></a>
-                </li>
-                <li class="active"><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li class="active"><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                     break;
                 case 3:
-                <li>
-                    <a href="#"></a>
-                </li>
+                        <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li class="active"><a href="#"></a></li>
                         <li><a href="#"></a></li>
                     break;
                 case 4:
-                <li>
-                    <a href="#"></a>
-                </li>
+                        <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                         <li class="active"><a href="#"></a></li>
@@ -80,32 +73,10 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $.fancybox("#body");
         $(".submitQuestion").click(function () {
             $("#AnswerId").val($(" input", this).val());
             $("#FormQues").submit();
         })
     })
 </script>
-@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
-    {
-    <div id="content">
-        <p>
-            <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
-            @Html.HiddenFor(m=>m.SurveyID)
-            <span>@ViewBag.ID.  </span> <span>@Html.DisplayFor(m => m.question)</span>
-        </p>
-        <p>
-            @foreach (var item in Model.Answers)
-            {
-                <div>
-                    @Html.RadioButtonFor(m=>m.AnswerId,item.AnswerId)@item.AnswerText
-                </div>
-            }
-        </p>
-
-        <p>
-            <input id="btnSubmit" type="submit" value="Next" class="" />
-        </p>
-    </div>
-    }
-*@

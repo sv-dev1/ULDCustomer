@@ -7,10 +7,19 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+    <!-- Add fancyBox main JS and CSS files -->
+    <script src="~/FancyBox/jquery.fancybox.js"></script>
+    <link href="~/FancyBox/jquery.fancybox.css?v=2.1.5" rel="stylesheet" media="screen" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/style.css" rel="stylesheet">
+    <style>
+        .fancybox-custom .fancybox-skin {
+            box-shadow: 0 0 50px #222;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,18 +27,6 @@
             <div class="float-left">
                 <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
             </div>
-            @*<div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>*@
         </div>
     </header>
     <div id="body">
@@ -44,9 +41,7 @@
                 <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
             </div>
         </div>
-    </footer>
-
-    @Scripts.Render("~/bundles/jquery")
+    </footer>    
     @RenderSection("scripts", required: false)
 </body>
 </html>
