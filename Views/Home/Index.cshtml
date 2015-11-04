@@ -2,14 +2,19 @@
 @{
     ViewBag.Title = "Home Page";
 }
+
+
+
 <div class="top-bg">
     <div class="container">
         <input type="hidden" id="hdnlink" name="name" value=" " />
         @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @Id = "FormQues" }))
         {
-            <div class="wizard-header">
+           
+           
+             <div class="wizard-header">
                 <div class="step">
-                    <p><small>Step @ViewBag.ID of 4</small></p>
+              @*      <p><small>Step @ViewBag.ID of 4</small></p>*@
                     <input type="hidden" name="ULDQuestionID" value="@ViewBag.ID" />
                     @Html.HiddenFor(m => m.SurveyID)
                     @Html.HiddenFor(m => m.AnswerId)
@@ -73,9 +78,10 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $.fancybox("#body");
+      //  $.fancybox("#body");
         $(".submitQuestion").click(function () {
-            $("#AnswerId").val($(" input", this).val());
+        $("#AnswerId").val($(" input", this).val());
+       
             $("#FormQues").submit();
         })
     })

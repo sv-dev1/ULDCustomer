@@ -329,6 +329,7 @@
     <Content Include="Images\img-6.jpg" />
     <Content Include="Images\not-available.png" />
     <Content Include="Images\slim-desktop.jpg" />
+    <Content Include="Images\ULD-small-gray.png" />
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>

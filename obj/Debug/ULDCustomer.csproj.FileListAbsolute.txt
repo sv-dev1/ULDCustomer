@@ -84,7 +84,6 @@ F:\Sandeep Singh\ULDCustomer\ULDCustomer\ULDCustomer\bin\zh-Hant\System.Spatial.
 F:\Sandeep Singh\ULDCustomer\ULDCustomer\ULDCustomer\obj\Debug\ULDCustomer.dll
 F:\Sandeep Singh\ULDCustomer\ULDCustomer\ULDCustomer\obj\Debug\ULDCustomer.pdb
 F:\Sandeep Singh\ULDCustomer\ULDCustomer\ULDCustomer\obj\Debug\ULDCustomer.csprojResolveAssemblyReference.cache
-F:\Ankush\Jay\ULDCustomer\bin\ULDCustomer.dll.config
 F:\Ankush\Jay\ULDCustomer\bin\ULDCustomer.dll
 F:\Ankush\Jay\ULDCustomer\bin\ULDCustomer.pdb
 F:\Ankush\Jay\ULDCustomer\bin\Microsoft.Web.Infrastructure.dll
